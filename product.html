@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Details</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <h1>Ocular - An Engineered Solution</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#">Shop</a>
+    <a href="checkout.html">Cart</a>
+  </nav>
+</header>
+
+<div class="product-page">
+
+  <div class="product-image">
+    <img id="productImg" src="" alt="Product">
+  </div>
+
+  <div class="product-info">
+    <p class="brand">Brand: Ocular</p>
+    <h2 id="productTitle"></h2>
+    <p class="rating">⭐⭐⭐⭐⭐ 4.5 (711 ratings)</p>
+    <p class="price-big" id="productPrice"></p>
+
+    <h3>About this item</h3>
+    <ul id="features"></ul>
+  </div>
+
+  <div class="buy-box">
+    <p class="price-big" id="sidePrice"></p>
+    <button class="buy-btn" onclick="addToCart()">Add to Cart</button>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 My Simple Store. All rights reserved.
+</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const model = params.get("model");
+
+const data = {
+  base: {
+    title: "Ocular Smart Wearable – Base Model",
+    price: "₹2,499",
+    img: "base.png",
+    features: [
+      "Provides cooling sensation",
+      "Provides relaxation",
+      "USB supported",
+      "Wireless Bluetooth connectivity",
+      "Extremely comfortable"
+    ]
+  },
+  premium: {
+    title: "Ocular Smart Wearable – Premium Model",
+    price: "₹3,499",
+    img: "premium.png",
+    features: [
+      "Provides cooling sensation",
+      "Provides relaxation",
+      "A high-efficiency, lightweight battery to enable true wireless portability",
+      "Wireless Bluetooth connectivity",
+      "An integrated audio system for music and phone calls",
+      "Biofeedback sensors to monitor heart rate, stress levels etc.",
+      "An onboard AI for \"Auto-Relax\" mode",
+      "Extremely comfortable"
+    ]
+  }
+};
+
+const product = data[model];
+
+document.getElementById("productTitle").innerText = product.title;
+document.getElementById("productPrice").innerText = product.price;
+document.getElementById("sidePrice").innerText = product.price;
+document.getElementById("productImg").src = product.img;
+
+const ul = document.getElementById("features");
+product.features.forEach(item => {
+  const li = document.createElement("li");
+  li.innerText = item;
+  ul.appendChild(li);
+});
+
+function addToCart() {
+  localStorage.setItem("cart", JSON.stringify(product));
+  window.location.href = "checkout.html";
+}
+</script>
+
+</body>
+</html>
